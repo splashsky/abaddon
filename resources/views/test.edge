@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Test Button</title>
+        @entryPointStyles('app')
+        @entryPointScripts('app')
+    </head>
+
+    <body>
+        <h1>Click this nice ol' button.</h1>
+        <h2></h2>
+        <button type="button">This button.</button>
+
+        <script>
+            window.addEventListener('DOMContentLoaded', () => {
+                const btn = document.querySelector('button')
+
+                btn.onclick = () => {
+                    window.axios.get('/api')
+                        .then((response) => {
+                            console.log(response)
+                            document.querySelector('h2').innerText = response.data.message
+                        })
+                        .catch((error) => {
+                            console.log(error)
+                        })
+                }
+            })
+        </script>
+    </body>
+</html>
